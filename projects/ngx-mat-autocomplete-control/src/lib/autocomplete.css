@@ -1,0 +1,27 @@
+.no-record {
+  color: #78797b;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: .5;
+  margin: 0.5rem 0;
+  padding: 30px 20px;
+}
+.no-record span::before, .no-record span::after {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  content: "";
+  height: 3px;
+  display: inline-block;
+  width: 20px;
+  position: relative;
+  top: -2px;
+}
+.no-record span::before {
+  margin-right: 5px
+}
+.no-record span::after {
+  margin-left: 5px
+}
+.mat-option-text b {
+  color: black;
+}

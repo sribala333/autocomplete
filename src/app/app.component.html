@@ -1,0 +1,23 @@
+<div style="max-width: 600px; margin: 40px auto; padding: 20px; font-family: sans-serif;">
+  <h2>ngx-mat-autocomplete-control Demo</h2>
+
+  <form [formGroup]="userForm">
+    <ngx-mat-autocomplete-control
+      [control]="userForm.get('userId')!"
+      [options]="userList"
+      refId="userId"
+      refName="userName"
+      label="Select User"
+      appearance="outline"
+      [required]="true"
+      highlightColor="#1976d2"
+      (selectionChange)="onSelectionChange($event)"
+      (propValueEvent)="onKeyup($event)">
+    </ngx-mat-autocomplete-control>
+  </form>
+
+  <div style="margin-top: 104px;">
+    <p><strong>Selected:</strong> {{ selectedUser | json }}</p>
+    <p><strong>Last keyup:</strong> {{ lastKeyup }}</p>
+  </div>
+</div>
