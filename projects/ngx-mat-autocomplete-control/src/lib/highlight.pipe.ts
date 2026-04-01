@@ -10,7 +10,7 @@ export class HighlightPipe implements PipeTransform {
   }
   transform(text: string, search:string,highlightColor:string): SafeHtml {
     if (search && text) {
-      let pattern = search.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+      let pattern = search.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
       pattern = pattern.split(' ').filter((t) => {
         return t.length > 0;
       }).join('|');

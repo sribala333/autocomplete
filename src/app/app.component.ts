@@ -10,17 +10,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
   title = 'AutoComplete';
   userForm!: FormGroup;
-  selectedUser: any = null;
-  lastKeyup: any = null;
+  selectedValue: any = null;
+  selectedData: any = null;
+  isDisabled = false;
 
   userList = [
     { userId: 1, userName: 'Sriram M P' },
-    { userId: 1, userName: 'Sribala' },
-    { userId: 2, userName: 'Balamurugan' },
-    { userId: 3, userName: 'Subashini' },
-    { userId: 4, userName: 'Narmatha' },
-    { userId: 5, userName: 'Priya' },
-    { userId: 6, userName: 'Karthik' }
+    { userId: 2, userName: 'Sribala' },
+    { userId: 3, userName: 'Balamurugan' },
+    { userId: 4, userName: 'Subashini' },
+    { userId: 5, userName: 'Narmatha' },
+    { userId: 6, userName: 'Priya' },
+    { userId: 7, userName: 'Karthik' }
   ];
 
   constructor(private fb: FormBuilder) {}
@@ -31,11 +32,18 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onSelectionChange(event: any): void {
-    this.selectedUser = event;
+  onSelectionChange(event: { value: any; data: any }): void {
+    this.selectedValue = event.value;
+    this.selectedData = event.data;
   }
 
-  onKeyup(event: any): void {
-    this.lastKeyup = event.value;
+  toggleDisabled(): void {
+    this.isDisabled = !this.isDisabled;
+  }
+
+  reset(): void {
+    this.userForm.reset();
+    this.selectedValue = null;
+    this.selectedData = null;
   }
 }

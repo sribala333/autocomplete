@@ -31,18 +31,18 @@
     (optionSelected)="emitValues($event)"
   >
     <!-- <mat-option>-------Select {{label}}-------</mat-option> -->
-    @for (data of filterList; track trackByFn($index, data)) {
+    @for (data of filterList; track data[refId]) {
       <mat-option
         [value]="data[refId]"
         class="autocom-option autocom-tr"
       >
         <span [innerHTML]="data[refName] | highlight: inputVal.value:highlightColor"></span>
       </mat-option>
-    }
-    @if (filterList.length == 0) {
+    } @empty {
       <mat-option>
         <div class="no-record"><span>No Data Found</span></div>
       </mat-option>
     }
   </mat-autocomplete>
 </mat-form-field>
+

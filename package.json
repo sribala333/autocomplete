@@ -7,15 +7,18 @@
     "build": "ng build",
     "build:lib": "ng build NgxMatAutocompleteControl",
     "test": "ng test",
-    "lint": "ng lint"
+    "test:lib": "ng test NgxMatAutocompleteControl",
+    "coverage": "ng test NgxMatAutocompleteControl --no-watch --code-coverage",
+    "publish:lib": "ng build NgxMatAutocompleteControl --configuration production && cd dist/ngx-mat-autocomplete-control && npm publish --access public",
+    "lint": "ng lint",
+    "check": "npm whoami || npm login --registry=https://registry.npmjs.org/ && cd /Users/srirammp/Documents/Projects/npm-packages/autocomplete/dist/ngx-mat-autocomplete-control && npm publish --access public --registry=https://registry.npmjs.org/"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^21.2.0",
     "@angular/cdk": "^21.2.0",
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
-    "@angular/core": "^21.2.0",
     "@angular/forms": "^21.2.0",
     "@angular/material": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
@@ -30,8 +33,11 @@
     "@angular/cli": "^21.2.0",
     "@angular/compiler-cli": "^21.2.0",
     "@angular/language-service": "^21.2.0",
-    "@types/node": "^22.0.0",
+    "@eslint/js": "^10.0.1",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^22.0.0",
+    "angular-eslint": "21.3.1",
+    "eslint": "^10.0.3",
     "jasmine-core": "~5.4.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -39,6 +45,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^21.2.0",
-    "typescript": "~5.9.0"
+    "typescript": "~5.9.0",
+    "typescript-eslint": "8.56.1"
   }
 }

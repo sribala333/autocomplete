@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/ngx-mat-autocomplete-control.svg)](https://www.npmjs.com/package/ngx-mat-autocomplete-control)
 [![license](https://img.shields.io/npm/l/ngx-mat-autocomplete-control.svg)](https://www.npmjs.com/package/ngx-mat-autocomplete-control)
 [![downloads](https://img.shields.io/npm/dm/ngx-mat-autocomplete-control.svg)](https://www.npmjs.com/package/ngx-mat-autocomplete-control)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/sribala333/autocomplete)
 
 A powerful, ready-to-use **Angular Material Autocomplete** component that works seamlessly with **Reactive Forms**. Drop it into any Angular project and get a fully featured searchable dropdown with highlighting, validation, and keyboard support — in minutes, not hours.
 
@@ -21,9 +22,9 @@ A powerful, ready-to-use **Angular Material Autocomplete** component that works 
 
 ---
 
-<!--## Demo
+## Demo
 
-![autocomplete-demo](https://media.giphy.com/placeholder)  Replace with an actual GIF/screenshot of your component -->
+[**Try the live demo on StackBlitz**](https://stackblitz.com/github/sribala333/autocomplete)
 
 ---
 
@@ -76,8 +77,7 @@ export class AppModule {}
   [label]="'Select User'"
   [appearance]="'outline'"
   [highlightColor]="'red'"
-  (selectionChange)="onUserSelected($event)"
-  (propValueEvent)="onKeyup($event)">
+  (selectionChange)="onUserSelected($event)">
 </ngx-mat-autocomplete-control>
 ```
 
@@ -109,12 +109,9 @@ export class UserPickerComponent implements OnInit {
     });
   }
 
-  onUserSelected(selectedValue: any): void {
-    console.log('Selected:', selectedValue);
-  }
-
-  onKeyup(event: { propertyName: any; value: any }): void {
-    console.log('Typed:', event.value);
+  onUserSelected(event: { value: any; data: any; control: any }): void {
+    console.log('Selected ID:', event.value);
+    console.log('Selected object:', event.data);
   }
 }
 ```
@@ -141,10 +138,13 @@ export class UserPickerComponent implements OnInit {
 
 ### Outputs
 
-| Event              | Payload                                          | Description                                  |
-| ------------------ | ------------------------------------------------ | -------------------------------------------- |
-| `selectionChange`  | Selected `refId` value                           | Fires when the user picks an option           |
-| `propValueEvent`   | `{ propertyName: FormControl, value: string }`   | Fires on every keyup with the current input   |
+| Event             | Payload                                                        | Description                                |
+| ----------------- | -------------------------------------------------------------- | ------------------------------------------ |
+| `selectionChange` | `{ value: any, data: any, control: UntypedFormControl }`       | Fires when the user picks an option        |
+
+- `value` — the `refId` field value of the selected option
+- `data` — the full selected option object from `options`
+- `control` — the bound `FormControl`
 
 ### Pipe: `autocompleteControl`
 
@@ -210,7 +210,7 @@ A helper pipe to extract the correct `FormControl` from nested form structures.
 
 | Library Version | Angular Version |
 | --------------- | --------------- |
-| `3.x`           | 21              |
+| `4.x`           | 21              |
 | `2.x`           | 13 – 19         |
 
 ---

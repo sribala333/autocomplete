@@ -1,23 +1,41 @@
-<div style="max-width: 600px; margin: 40px auto; padding: 20px; font-family: sans-serif;">
-  <h2>ngx-mat-autocomplete-control Demo</h2>
+<div class="demo-container">
+  <h2>ngx-mat-autocomplete-control</h2>
+  <p class="subtitle">Angular Material autocomplete with reactive forms, search highlighting &amp; validation.</p>
 
   <form [formGroup]="userForm">
     <ngx-mat-autocomplete-control
-      [control]="userForm.get('userId')!"
+      [control]="$any(userForm.get('userId'))"
       [options]="userList"
       refId="userId"
       refName="userName"
       label="Select User"
       appearance="outline"
       [required]="true"
+      [disabled]="isDisabled"
       highlightColor="#1976d2"
-      (selectionChange)="onSelectionChange($event)"
-      (propValueEvent)="onKeyup($event)">
+      (selectionChange)="onSelectionChange($event)">
     </ngx-mat-autocomplete-control>
   </form>
 
-  <div style="margin-top: 104px;">
-    <p><strong>Selected:</strong> {{ selectedUser | json }}</p>
-    <p><strong>Last keyup:</strong> {{ lastKeyup }}</p>
+  <div class="actions">
+    <button mat-stroked-button (click)="toggleDisabled()">
+      {{ isDisabled ? 'Enable' : 'Disable' }}
+    </button>
+    <button mat-stroked-button (click)="reset()">Reset</button>
+  </div>
+
+  <div class="result-panel">
+    <div class="result-row">
+      <span class="label">Form status:</span>
+      <span [class]="userForm.valid ? 'valid' : 'invalid'">{{ userForm.status }}</span>
+    </div>
+    <div class="result-row">
+      <span class="label">Selected ID:</span>
+      <span>{{ selectedValue ?? '—' }}</span>
+    </div>
+    <div class="result-row">
+      <span class="label">Selected data:</span>
+      <span>{{ selectedData | json }}</span>
+    </div>
   </div>
 </div>

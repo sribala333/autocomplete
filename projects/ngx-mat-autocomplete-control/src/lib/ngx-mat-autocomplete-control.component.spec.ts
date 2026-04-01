@@ -61,13 +61,13 @@ describe('NgxMatAutocompleteControlComponent', () => {
       expect(component.control.value).toBe(2);
     }));
 
-    it('should not store tempValue when control value is 0 or empty', () => {
+    it('should not change control value when control value is 0 or empty', () => {
       component.control.setValue('');
       const changes: SimpleChanges = {
         options: new SimpleChange(null, mockOptions, false)
       };
       component.ngOnChanges(changes);
-      expect(component.tempValue).toBeUndefined();
+      expect(component.control.value).toBe('');
     });
 
     it('should disable control when disabled change is true', () => {
@@ -121,11 +121,11 @@ describe('NgxMatAutocompleteControlComponent', () => {
     });
   });
 
-  // --- assignResourceCopy ---
-  describe('assignResourceCopy', () => {
+  // --- setItems (empty value copies all) ---
+  describe('setItems with empty value', () => {
     it('should copy all options to filterList', () => {
       component.filterList = [];
-      component.assignResourceCopy();
+      component.setItems('');
       expect(component.filterList.length).toBe(mockOptions.length);
     });
   });
@@ -146,17 +146,12 @@ describe('NgxMatAutocompleteControlComponent', () => {
       expect(event.preventDefault).toHaveBeenCalled();
     });
 
-    it('should set keyUp to true and emit propValueEvent when value matches an option', () => {
-      spyOn(component.propValueEvent, 'emit');
+    it('should set keyUp to true when value matches an option', () => {
       component.setItems('');
       const event = { key: 'a' };
       const result = component.keyUpFunction(event, 'Sriram');
       expect(result).toBeTrue();
       expect(component.keyUp).toBeTrue();
-      expect(component.propValueEvent.emit).toHaveBeenCalledWith({
-        propertyName: component.control,
-        value: 'Sriram'
-      });
     });
 
     it('should set keyUp to true when value does not match any option', () => {
@@ -167,12 +162,10 @@ describe('NgxMatAutocompleteControlComponent', () => {
     });
 
     it('should set keyUp to false when value is empty', () => {
-      spyOn(component.propValueEvent, 'emit');
       const event = { key: 'Backspace' };
       const result = component.keyUpFunction(event, '');
       expect(result).toBeTrue();
       expect(component.keyUp).toBeFalse();
-      expect(component.propValueEvent.emit).toHaveBeenCalled();
     });
   });
 
@@ -277,24 +270,16 @@ describe('NgxMatAutocompleteControlComponent', () => {
 
   // --- emitValues ---
   describe('emitValues', () => {
-    it('should emit selectionChange and propValueEvent with the selected value', () => {
+    it('should emit selectionChange with value and data when an option is selected', () => {
       spyOn(component.selectionChange, 'emit');
-      spyOn(component.propValueEvent, 'emit');
+      component.setItems('');
       const mockEvent = { option: { value: 2 } };
       component.emitValues(mockEvent);
-      expect(component.selectionChange.emit).toHaveBeenCalledWith(2);
-      expect(component.propValueEvent.emit).toHaveBeenCalledWith({
-        propertyName: component.control,
-        value: 2
+      expect(component.selectionChange.emit).toHaveBeenCalledWith({
+        control: component.control,
+        value: 2,
+        data: { userId: 2, userName: 'Bala' }
       });
-    });
-  });
-
-  // --- trackByFn ---
-  describe('trackByFn', () => {
-    it('should return the index', () => {
-      expect(component.trackByFn(0, {})).toBe(0);
-      expect(component.trackByFn(5, { id: 1 })).toBe(5);
     });
   });
 });

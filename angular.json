@@ -90,6 +90,15 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -116,6 +125,15 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/ngx-mat-autocomplete-control/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-mat-autocomplete-control/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-mat-autocomplete-control/**/*.ts",
+              "projects/ngx-mat-autocomplete-control/**/*.html"
+            ]
           }
         }
       }
