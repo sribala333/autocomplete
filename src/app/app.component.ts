@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'AutoComplete';
+  title = 'Auto Complete';
   userForm!: FormGroup;
   selectedValue: any = null;
   selectedData: any = null;
